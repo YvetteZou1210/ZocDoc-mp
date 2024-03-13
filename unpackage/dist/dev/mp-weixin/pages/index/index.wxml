@@ -1,1 +1,1 @@
-<view class="content"><image class="logo" src="/static/logo.png"></image><view class="text-area"><text class="title">{{a}}</text><view wx:for="{{b}}" wx:for-item="item" key="item.name">{{item.a}}-{{item.b}}<view/></view></view></view>
+<view class="content"><view class="text-area"><text class="title">{{a}}</text><view wx:for="{{b}}" wx:for-item="item" wx:key="c">{{item.a}}-{{item.b}} <view/></view></view></view>
