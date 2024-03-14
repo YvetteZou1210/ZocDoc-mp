@@ -1,20 +1,40 @@
 {
+	"easycom": {
+		"autoscan": true,
+		"custom": {
+			"znx-(.*)": "@/componnets/$1.vue"
+		}
+	},
 	"pages": [{
-		"path": "pages/index/index",
-		"style": {
-			"navigationBarTitleText": "Home"
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "Home",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/order/index",
+			"style": {
+				"navigationBarTitleText": "Your Orders",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/user/index",
+			"style": {
+				"navigationBarTitleText": "Profile",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/search/index",
+			"style": {
+				"navigationBarTitleText": "Search",
+				"navigationStyle": "custom"
+			}
 		}
-	}, {
-		"path": "pages/order/index",
-		"style": {
-			"navigationBarTitleText": "Your Orders"
-		}
-	}, {
-		"path": "pages/user/index",
-		"style": {
-			"navigationBarTitleText": "Profile"
-		}
-	}],
+
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "",

@@ -1,1 +1,1 @@
-<view> 用户页面 </view>
+<view><navbar wx:if="{{a}}" u-i="521d90b4-0" bind:__l="__l" u-p="{{a}}"/></view>

@@ -1,1 +1,1 @@
-<view> 订单页面 </view>
+<view><navbar wx:if="{{a}}" u-i="2ef78e69-0" bind:__l="__l" u-p="{{a}}"/> 订单页面 </view>

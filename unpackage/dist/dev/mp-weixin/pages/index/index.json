@@ -1,4 +1,7 @@
 {
   "navigationBarTitleText": "Home",
-  "usingComponents": {}
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "navbar": "../../components/navbar/navbar"
+  }
 }

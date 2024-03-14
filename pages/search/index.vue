@@ -4,6 +4,6 @@
 	</view>
 </template>
 
-<script setup></script>
+<script setup lang="ts"></script>
 
-<style></style>
+<style lang="scss" scoped></style>

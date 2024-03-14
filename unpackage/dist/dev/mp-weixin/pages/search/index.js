@@ -16,5 +16,5 @@ function _sfc_render(_ctx, _cache) {
     })
   };
 }
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/Users/evan/Documents/HBuilderProjects/ZocDoc-uniapp/pages/user/index.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/Users/evan/Documents/HBuilderProjects/ZocDoc-uniapp/pages/search/index.vue"]]);
 wx.createPage(MiniProgramPage);

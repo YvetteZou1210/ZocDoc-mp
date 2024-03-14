@@ -1,143 +1,4 @@
-<template>
-	<view class="nav">
-		<view :style="'height:' + status + 'rpx;' + containerStyle"></view>
-		<view v-if="isHome" class="headNav" :style="'height:' + navHeight + 'rpx;line-height:' + navHeight + 'rpx;padding-left:20rpx;'">
-			<text class="city">LA</text>
-			<view style="flex: 1">
-				<!-- uniapp官方的navigator标签，不需要引入定义，直接使用包裹 -->
-				<navigator
-					url="../../pages/search/index"
-					:style="
-						'height:' +
-						menu.height * 2 +
-						'rpx;line-height:' +
-						menu.height * 2 +
-						'rpx;margin-top:' +
-						(menu.top * 2 - status) +
-						'rpx;margin-left:32rpx;margin-right:' +
-						(menu.width * 2 + 24) +
-						'rpx;background: #f4f4f4;border-radius:200rpx;text-align:center'
-					"
-				>
-					<text class="search-text">Search Hospital</text>
-				</navigator>
-			</view>
-		</view>
-		<view v-else class="navbar" :style="'height:' + navHeight + 'rpx;' + containerStyle">
-			<view class="back-icon" @click="backOrHome">
-				<!-- 如果页面栈当前页面数目不止一个 -->
-				<image v-if="pages > 1" src="../../static/images/ic_back.png"></image>
-				<image v-else src="../../static/images/ic_home.png"></image>
-			</view>
-			<view class="nav-title" v-if="titleText">
-				<view :style="'height:' + navHeight + 'rpx;line-height:' + navHeight + 'rpx;' + textStyle">{{ titleText }}</view>
-			</view>
-		</view>
-	</view>
-</template>
 
-<script setup>
-import { ref, reactive, onBeforeMount } from 'vue';
-//从外界传参，控制该组件样式修改
-const props = defineProps({
-	background: {
-		type: String,
-		default: 'rgba(255, 255, 255, 1)'
-		// 如果没有传入background的样式参数，则默认为white
-	},
-	//字体颜色
-	color: {
-		type: String,
-		default: 'rgba(0, 0, 0, 1)'
-	},
-	//字体大小
-	fontSize: {
-		type: String,
-		default: '32'
-	},
-	//左上角宽度
-	iconWidth: {
-		type: String,
-		default: '116'
-	},
-	//左上角高度
-	iconHeight: {
-		type: String,
-		default: '38'
-	},
-	titleText: {
-		type: String,
-		default: ''
-	},
-	isHome: {
-		type: Boolean,
-		default: false
-	}
-});
-const emits = defineEmits(['navBarAttached']);
-//在挂载之前，设置navbar的结构和样式
-onBeforeMount(() => {
-	setNavSize();
-	setStyle();
-	emits('navBarAttached', {
-		detail: {
-			statusHeight: status.value,
-			navHeight: navHeight.value,
-			navBarHeight: status.value + navHeight.value
-		}
-	});
-});
-// 状态栏高度
-const status = ref(0);
-// 内容高度
-const navHeight = ref(0);
-// 背景颜色
-const containerStyle = ref('');
-// 字体样式
-const textStyle = ref('');
-// 图标的样式
-const iconStyle = ref('');
-// 页面栈的数量
-const pages = ref(getCurrentPages().length);
-// 获取到胶囊的位置,决定search框位置
-const menu = reactive(uni.getMenuButtonBoundingClientRect());
-// 状态栏设置
-const setNavSize = () => {
-	const { system, statusBarHeight } = uni.getSystemInfoSync();
-	// 1. 计算状态栏高度
-	//system 设备系统 statusBarHeight 设备状态栏高度
-	//页面元素在uniapp中的宽度计算公式： 750*元素设计稿宽度/设计稿基准宽度
-	//一般移动设备按照iphone6/375宽度设计稿为基准，所以元素宽度需要*2
-	status.value = statusBarHeight * 2;
-	// 2. 检查设备系统android/ios来确定内容高度
-	const isiOS = system.indexOf('iOS') > -1;
-	if (!isiOS) {
-		navHeight.value = 96;
-	} else {
-		navHeight.value = 88;
-	}
-	// console.log(res)
-};
-// 样式设置
-const setStyle = () => {
-	// 变量转字符串
-	containerStyle.value = ['background:' + props.background].join(';');
-	textStyle.value = ['color:' + props.color, 'font-size:' + props.fontSize + 'rpx'].join(';');
-	iconStyle.value = ['width:' + props.iconWidth + 'rpx', 'height:' + props.iconHeight + 'rpx'].join(';');
-};
-//返回按钮，如果当前页面数目>1的话，则返回页面
-const backOrHome = () => {
-	if (pages.value > 1) {
-		uni.navigateBack();
-	} else {
-		uni.switchTab({
-			url: '/pages/index/index'
-		});
-	}
-};
-</script>
-
-<style>
 .nav {
 	position: fixed;
 	width: 100%;
@@ -178,7 +39,6 @@ const backOrHome = () => {
 		no-repeat left center;
 	background-size: 40rpx;
 }
-
 .city:after {
 	content: ' ';
 	display: inline-block;
@@ -187,7 +47,6 @@ const backOrHome = () => {
 	border-width: 1px 1px 0 0;
 	border-color: #353535;
 	border-style: solid;
-	-webkit-transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
 	transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
 	position: relative;
 	top: -2px;
@@ -212,4 +71,3 @@ const backOrHome = () => {
 	left: 0%;
 	z-index: 2;
 }
-</style>

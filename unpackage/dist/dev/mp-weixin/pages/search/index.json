@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "Profile",
+  "navigationBarTitleText": "Search",
   "navigationStyle": "custom",
   "usingComponents": {
     "navbar": "../../components/navbar/navbar"
