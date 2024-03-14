@@ -64,7 +64,7 @@
 			<view class="weui-cell hosp-item weui-cell-access" v-for="(item, index) in hospitals" :key="item.id" :data-hid="item.id" @click="toHospitals">
 				<!-- 图片 -->
 				<view class="weui-cell__hd">
-					<image :src="item.avatar ? item.avatar_url : '../../static/resource/images/avatar.jpg'" mode="aspectFill" class="hosp-avatar"></image>
+					<image :src="item.avatar ? item.avatar_url : '../../static/images/avatar.jpg'" mode="aspectFill" class="hosp-avatar"></image>
 				</view>
 				<!-- 医院信息 -->
 				<view class="weui-cell__bd">
@@ -134,41 +134,75 @@ onLoad(() => {
 				success: ({ data }) => {
 					console.log(data);
 					nav2s.value = data.nav2s;
-					navs.value = data.navs.map((item: any) => ({
-						...item,
-						title: ''
-					}));
-					hospitals.value = data.hospitals;
+					console.log('nav2s', nav2s);
+					const titles = ['Medicine', 'Clean', 'Result', 'Reservation', 'VIP'];
+					const Hospitals = [
+						{
+							name: 'Massachusetts General Hos',
+							avatar_url: '../../static/images/MGH.png',
+							avatar: 'true',
+							rank: '1st',
+							label: 'Top-tier Hospital',
+							intro: 'MGH is renowned for its cutting-edge medical technologies and excellent patient care.'
+						},
+						{
+							name: 'New York-Presbyterian Hos',
+							avatar_url: '../../static/images/NYPH.png',
+							avatar: 'true',
+							rank: '2nd',
+							label: 'Leading Medical Center',
+							intro: 'NYPH provides comprehensive healthcare services and specializes in various medical fields.'
+						},
+						{
+							name: 'UCLA Medical Center',
+							avatar_url: '../../static/images/UCLAMC.png',
+							avatar: 'true',
+							rank: '3rd',
+							label: 'Innovative Healthcare Facility',
+							intro: 'UCLAMC is known for its innovative approaches to medical treatments and research.'
+						}
+					];
+					navs.value = data.navs.map((item: any, index: string | number) => {
+						// 使用 titles 数组中对应索引位置的值作为 title
+						const title = titles[index] || '默认标题';
+						// 返回新的对象，替换 title
+						return { ...item, title };
+					});
+					console.log('navs', navs);
+					hospitals.value = Hospitals;
 				}
 			});
 		}
 	});
 });
 // 点击快捷入口（两个图片的）
-const onNav2sTap = (e) => {
-	// 获取当前点击的图片的数据
+const onNav2sTap = (e: { currentTarget: { dataset: { index: string | number } } }) => {
+	// 获取当前点击的图片的数据（将被ref或者reactive变成代理或者其他对象的数据变成原对象）
 	const nav = toRaw(nav2s.value)[e.currentTarget.dataset.index];
+	console.log('nav2s', nav);
 	jump(nav, 'nav2');
 };
 
 // 点击快捷入口（多个的）
-const onNavsTap = (e) => {
+const onNavsTap = (e: { currentTarget: { dataset: { index: string | number } } }) => {
 	// console.log(e);
 	// 获取当前点击的图片的数据
 	const nav = toRaw(navs.value)[e.currentTarget.dataset.index];
+	console.log('nav', nav);
 	jump(nav, 'nav');
 };
-// 公共部分
-const jump = (nav, type) => {
+// 公共部分 跳转逻辑
+const jump = (nav: { stype: number; stype_link: any }, _type: string) => {
 	// 判断是否为内部链接
 	if (nav.stype == 1) {
+		console.log(nav.stype_link);
 		uni.navigateTo({
 			url: nav.stype_link
 		});
 	}
 };
 // 跳转到医院详情
-const toHospitals = (e) => {
+const toHospitals = (e: { currentTarget: { dataset: { hid: string } } }) => {
 	// console.log(e.currentTarget.dataset);
 	uni.navigateTo({
 		url: '/pages/hospital/index?hid=' + e.currentTarget.dataset.hid

@@ -1,5 +1,8 @@
 {
   "devDependencies": {
     "vite-plugin-vue-setup-extend": "^0.4.0"
+  },
+  "dependencies": {
+    "uqrcodejs": "^4.0.7"
   }
 }

@@ -32,8 +32,21 @@
 				"navigationBarTitleText": "Search",
 				"navigationStyle": "custom"
 			}
+		},
+		{
+			"path": "pages/service/index",
+			"style": {
+				"navigationBarTitleText": "service",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/hospital/index",
+			"style": {
+				"navigationBarTitleText": "hospital",
+				"navigationStyle": "custom"
+			}
 		}
-
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

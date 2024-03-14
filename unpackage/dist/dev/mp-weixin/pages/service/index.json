@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "service",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "navbar": "../../components/navbar/navbar"
+  }
+}

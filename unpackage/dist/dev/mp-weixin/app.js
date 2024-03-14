@@ -7,6 +7,8 @@ if (!Math) {
   "./pages/order/index.js";
   "./pages/user/index.js";
   "./pages/search/index.js";
+  "./pages/service/index.js";
+  "./pages/hospital/index.js";
 }
 const _sfc_main = {
   onLaunch: function() {

@@ -44,11 +44,40 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
             success: ({ data }) => {
               console.log(data);
               nav2s.value = data.nav2s;
-              navs.value = data.navs.map((item) => ({
-                ...item,
-                title: ""
-              }));
-              hospitals.value = data.hospitals;
+              console.log("nav2s", nav2s);
+              const titles = ["Medicine", "Clean", "Result", "Reservation", "VIP"];
+              const Hospitals = [
+                {
+                  name: "Massachusetts General Hos",
+                  avatar_url: "../../static/images/MGH.png",
+                  avatar: "true",
+                  rank: "1st",
+                  label: "Top-tier Hospital",
+                  intro: "MGH is renowned for its cutting-edge medical technologies and excellent patient care."
+                },
+                {
+                  name: "New York-Presbyterian Hos",
+                  avatar_url: "../../static/images/NYPH.png",
+                  avatar: "true",
+                  rank: "2nd",
+                  label: "Leading Medical Center",
+                  intro: "NYPH provides comprehensive healthcare services and specializes in various medical fields."
+                },
+                {
+                  name: "UCLA Medical Center",
+                  avatar_url: "../../static/images/UCLAMC.png",
+                  avatar: "true",
+                  rank: "3rd",
+                  label: "Innovative Healthcare Facility",
+                  intro: "UCLAMC is known for its innovative approaches to medical treatments and research."
+                }
+              ];
+              navs.value = data.navs.map((item, index) => {
+                const title = titles[index] || "默认标题";
+                return { ...item, title };
+              });
+              console.log("navs", navs);
+              hospitals.value = Hospitals;
             }
           });
         }
@@ -56,14 +85,17 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     });
     const onNav2sTap = (e) => {
       const nav = common_vendor.toRaw(nav2s.value)[e.currentTarget.dataset.index];
+      console.log("nav2s", nav);
       jump(nav);
     };
     const onNavsTap = (e) => {
       const nav = common_vendor.toRaw(navs.value)[e.currentTarget.dataset.index];
+      console.log("nav", nav);
       jump(nav);
     };
-    const jump = (nav, type) => {
+    const jump = (nav, _type) => {
       if (nav.stype == 1) {
+        console.log(nav.stype_link);
         common_vendor.index.navigateTo({
           url: nav.stype_link
         });
@@ -114,7 +146,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       } : {}, {
         h: common_vendor.f(hospitals.value, (item, index, i0) => {
           return {
-            a: item.avatar ? item.avatar_url : "../../static/resource/images/avatar.jpg",
+            a: item.avatar ? item.avatar_url : "../../static/images/avatar.jpg",
             b: common_vendor.t(item.name),
             c: common_vendor.t(item.rank),
             d: common_vendor.t(item.label),
